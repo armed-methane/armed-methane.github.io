@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: 'Misto','Courier New', Courier, monospace;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+@font-face {
+  font-family: "Misto";
+  src: url("Misto.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  overflow: hidden;
+}
+
+.propeller {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  transform: translate(-50%, -50%);
+  opacity: 0.15;
+  filter: blur(0.5px);
+  z-index: 1;
+  transform-origin: center;
+}
+
+.title {
+  font-family: "Misto", sans-serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  margin: 0;
+  color: #ff3d1b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+body {
+  font-family: "Courier New", monospace !important;
+}
+
+.spacer {
+  height: 200vh;
+}
+
