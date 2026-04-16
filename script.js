@@ -6,6 +6,9 @@ const subtitle = document.querySelector(".subtitle");
 const body = document.body;
 const chars = "<!>?@#$%^&*>";
 
+let lastScrollY = 0;
+let isNavbarHidden = false;
+
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
@@ -22,6 +25,35 @@ function resetScroll() {
   window.scrollTo(0, 0);
   setTimeout(() => window.scrollTo(0, 0), 20);
 }
+
+function hideNavbar() {
+  if (!hero.classList.contains('navbar') || isNavbarHidden) return;
+  isNavbarHidden = true;
+  hero.classList.add('hide');
+}
+
+function showNavbar() {
+  if (!hero.classList.contains('navbar') || !isNavbarHidden) return;
+  isNavbarHidden = false;
+  hero.classList.remove('hide');
+}
+
+function handleScroll() {
+  if (!hero.classList.contains('navbar')) return;
+  const currentY = window.pageYOffset;
+  const delta = currentY - lastScrollY;
+  if (Math.abs(delta) < 15) return;
+
+  if (delta > 0) {
+    hideNavbar();
+  } else {
+    showNavbar();
+  }
+
+  lastScrollY = currentY;
+}
+
+window.addEventListener('scroll', handleScroll, { passive: true });
 
 window.addEventListener('DOMContentLoaded', () => {
   lockScroll();
@@ -118,6 +150,8 @@ function moveHeroToNavbar() {
       hero.style.left = "0";
       hero.style.width = "100%";
       hero.style.height = "8rem";
+      hero.style.transform = "";
+      lastScrollY = window.pageYOffset;
       unlockScroll();
     }
   });
@@ -130,7 +164,7 @@ function moveHeroToNavbar() {
 
   gsap.to(subtitle, {
     duration: 0.6,
-    fontSize: "1rem",
+    fontSize: "0.7rem",
     opacity: 0.85,
     ease: "power3.inOut"
   });
@@ -145,4 +179,3 @@ function moveHeroToNavbar() {
     ease: "power3.inOut"
   });
 }
-
