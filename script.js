@@ -3,8 +3,9 @@ const el = document.querySelector(".title");
 const hero = document.querySelector(".hero");
 const title = document.querySelector(".title");
 const subtitle = document.querySelector(".subtitle");
+const statusBox = document.querySelector(".status-box");
 const body = document.body;
-const chars = "<!>?@#$%^&*>";
+const chars = "asdfghjklqwertyuiopzxcvbnm1234567890";
 
 let lastScrollY = 0;
 let isNavbarHidden = false;
@@ -17,8 +18,27 @@ function lockScroll() {
   body.classList.add('no-scroll');
 }
 
+let lenis;
+
 function unlockScroll() {
   body.classList.remove('no-scroll');
+}
+
+function initLenis() {
+  if (lenis || typeof Lenis === 'undefined') return;
+
+  lenis = new Lenis({
+    duration: 1,
+    easing: (t) => 1 - Math.pow(1 - t, 5),
+    wheelMultiplier: 1,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
 }
 
 function resetScroll() {
@@ -141,7 +161,7 @@ function moveHeroToNavbar() {
     top: 0,
     left: 0,
     width: "100%",
-    height: "8rem",
+    height: "5rem",
     ease: "power3.inOut",
     onComplete: () => {
       hero.classList.add("navbar");
@@ -149,16 +169,18 @@ function moveHeroToNavbar() {
       hero.style.top = "0";
       hero.style.left = "0";
       hero.style.width = "100%";
-      hero.style.height = "8rem";
+      hero.style.height = "5rem";
       hero.style.transform = "";
       lastScrollY = window.pageYOffset;
       unlockScroll();
+      initLenis();
+      showStatusBox();
     }
   });
 
   gsap.to(title, {
     duration: 0.6,
-    fontSize: "1.5rem",
+    fontSize: "3rem",
     ease: "power3.inOut"
   });
 
@@ -179,3 +201,21 @@ function moveHeroToNavbar() {
     ease: "power3.inOut"
   });
 }
+
+function showStatusBox() {
+  if (!statusBox) return;
+  statusBox.classList.remove("closed");
+  statusBox.classList.add("visible");
+  statusBox.removeAttribute("aria-hidden");
+}
+
+const statusClose = document.querySelector(".status-close");
+if (statusClose) {
+  statusClose.addEventListener("click", () => {
+    if (!statusBox) return;
+    statusBox.classList.remove("visible");
+    statusBox.classList.add("closed");
+    statusBox.setAttribute("aria-hidden", "true");
+  });
+}
+
