@@ -1,8 +1,8 @@
 body {
   margin: 0;
   background: black;
-  color: white;
-  font-family: 'Misto','Courier New', Courier, monospace;
+  color: rgb(0, 0, 0);
+  font-family: 'Humane','Courier New', Courier, monospace;
 }
 
 body.no-scroll {
@@ -11,8 +11,8 @@ body.no-scroll {
 }
 
 @font-face {
-  font-family: "Misto";
-  src: url("Misto.woff2") format("woff2");
+  font-family: "Humane";
+  src: url("Humane-Bold.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -34,6 +34,7 @@ body.no-scroll {
 .hero.navbar {
   transform: translateY(0);
   transition: transform 0.3s ease;
+  background: black;
 }
 
 .hero.navbar.hide {
@@ -53,22 +54,92 @@ body.no-scroll {
 }
 
 .title {
-  font-family: "Misto", sans-serif;
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-family: "Humane", sans-serif;
+  font-size: clamp(5rem, 14vw, 12rem);
   margin: 0;
   color: #ff3d1b;
   letter-spacing: 2px;
   text-transform: uppercase;
   z-index: 2;
+  font-style: normal;
 }
 
 .subtitle {
   font-size: 1.5rem;
   opacity: 0.7;
+  color: rgb(255, 255, 255);
+  margin: -0.5rem 0 0 0;
 }
 
 body {
   font-family: "Courier New", monospace !important;
+}
+
+.page-status {
+  padding-top: 5rem;
+}
+
+.status-box {
+  max-width: 100%;
+  padding: 1.5rem;
+  border-radius: 0px;
+  background: #ff3d1b;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease, max-height 0.5s ease;
+}
+
+.status-box.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  max-height: 500px;
+}
+
+.status-box.closed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-24px);
+  max-height: 0;
+}
+
+.status-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.site-content {
+  width: 100%;
+}
+
+.website-content {
+  min-height: 30vh;
+}
+
+.status-box h1 {
+  margin-top: 0;
+  margin-bottom: 0rem;
+  letter-spacing: 3px;
+  color: #000000;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-family: "Humane", sans-serif;
+}
+
+.status-box p {
+  margin: 0;
+  line-height: 1.8;
+  opacity: 0.88;
 }
 
 .spacer {
