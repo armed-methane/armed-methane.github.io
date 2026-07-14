@@ -79,8 +79,6 @@ body::before {
   height: 0;
   pointer-events: none;
   z-index: 2147483647;
-  /* true color inversion: white blended in "difference" mode inverts
-     whatever is underneath, regardless of the background color/image */
   mix-blend-mode: difference;
   transition: transform 0.02s linear;
 }
@@ -149,7 +147,6 @@ body::before {
   white-space: nowrap;
 }
 
-/* expands into the full target shape only over clickable elements */
 .cursor-target.is-hovering .cursor-ring {
   width: 30px;
   height: 30px;
@@ -158,7 +155,6 @@ body::before {
   opacity: 1;
 }
 
-/* hide entirely on touch devices so it doesn't leave a stray dot on tap */
 @media (pointer: coarse) {
   .cursor-target {
     display: none;
@@ -305,7 +301,6 @@ body {
   background: #ff6a45;
 }
 
-/* ============ 3D molecule banner ============ */
 .molecule-banner {
   position: relative;
   width: 100%;
