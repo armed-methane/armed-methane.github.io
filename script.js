@@ -13,6 +13,8 @@ const prefersReducedMotion = window.matchMedia(
 
 let lastScrollY = 0;
 let isNavbarHidden = false;
+const isPhoneDevice = window.matchMedia("(max-width: 900px) and (pointer: coarse)").matches
+  || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -271,8 +273,28 @@ if (statusClose) {
 const introGate = document.getElementById("introGate");
 const introGateAccept = document.querySelector(".intro-gate-accept");
 
+function setIntroGateContent() {
+  if (!introGate) return;
+
+  const titleEl = document.getElementById("introGateTitle");
+  const messageEl = introGate.querySelector("p");
+
+  if (!titleEl || !messageEl) return;
+
+  if (isPhoneDevice) {
+    titleEl.textContent = "NOTICE";
+    messageEl.textContent = "this site does not have mobile flexibility and is meant to be used on laptop or pc, sorry!";
+  }
+}
+
 function showIntroGate() {
+  setIntroGateContent();
+
   if (!introGate) {
+    if (isPhoneDevice) {
+      body.classList.add("mobile-stopped");
+      return;
+    }
     moveHeroToNavbar();
     return;
   }
@@ -287,8 +309,15 @@ if (introGateAccept) {
       introGate.setAttribute("aria-hidden", "true");
       setTimeout(() => {
         introGate.remove();
+        if (isPhoneDevice) {
+          body.classList.add("mobile-stopped");
+          lockScroll();
+          return;
+        }
         moveHeroToNavbar();
       }, 400);
+    } else if (isPhoneDevice) {
+      body.classList.add("mobile-stopped");
     } else {
       moveHeroToNavbar();
     }
