@@ -170,6 +170,11 @@ body.no-scroll {
   height: 100vh;
 }
 
+body.mobile-stopped .page-status,
+body.mobile-stopped .site-footer {
+  display: none;
+}
+
 @font-face {
   font-family: "Humane";
   src: url("Humane-Bold.woff2") format("woff2");
@@ -561,8 +566,17 @@ body {
   display: block;
   font-family: "Humane", "Anton", sans-serif;
   font-size: 2rem;
-  opacity: 0.35;
+  opacity: 0.95;
   margin-bottom: 0.25rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.card--accent .card-index {
+  color: #14181e;
+}
+.card--dark .card-index,
+.card--outline .card-index {
+  color: #ff3d1b;
 }
 .hud-frame::before,
 .hud-frame::after {
@@ -595,8 +609,8 @@ body {
 .card--accent {
   background: #ff3d1b;
 }
-.card--accent h3,
-.card--accent p {
+.card.card--accent h3,
+.card.card--accent p {
   color: #14181e;
 }
 .card--accent::before,
